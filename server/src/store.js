@@ -10,7 +10,10 @@ const defaultProfile = (name) => ({
   xp: 0,
   coins: 0,
   health: 100,
-  inventory: [{ id: randomUUID(), name: 'Redcoat Saber', category: 'sword', rarity: 'Common' }],
+  inventory: [
+    { id: randomUUID(), name: 'Redcoat Saber', category: 'sword', rarity: 'Common' },
+    { id: randomUUID(), name: 'Brown Bess', category: 'musket', rarity: 'Common' }
+  ],
   createdAt: new Date().toISOString()
 });
 
