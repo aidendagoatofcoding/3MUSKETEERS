@@ -7,8 +7,13 @@
   "scripts": {
     "start": "node server/src/index.js",
     "dev": "node --watch server/src/index.js",
-    "check": "node --check server/src/index.js && node --check server/src/game.js && node --check server/src/store.js && node --check server/src/config.js && node --check server/src/weapons.js && node --check public/client.js"
+    "check": "node --check server/src/index.js && node --check server/src/game.js && node --check server/src/store.js && node --check server/src/config.js && node --check server/src/items.js && node --check server/src/mobs.js && node --check server/src/progression.js && node --check server/src/worlds.js && node --check server/src/weapons.js && node --check public/client.js"
   },
-  "engines": { "node": ">=20" },
-  "dependencies": { "express": "^4.21.2", "socket.io": "^4.8.1" }
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
 }

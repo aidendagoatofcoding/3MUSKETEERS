@@ -2,31 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#171d26">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10151b">
   <title>3MUSKETTERS</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <main class="game-shell">
-    <header class="topbar">
-      <div class="brand"><span class="brand-mark">3</span><span>3MUSKETTERS<small>FIELD TEST</small></span></div>
-      <div class="player-info"><span id="player-name">Connecting…</span><span id="level">LVL 1</span></div>
-    </header>
-    <section class="game-frame" aria-label="Game world">
-      <canvas id="game" aria-label="Game screen"></canvas>
-      <div class="status-pill" id="connection">Connecting to server…</div>
-      <aside class="hud">
+  <main id="app">
+    <section id="start-screen" class="start-screen">
+      <div class="start-glow"></div>
+      <div class="start-card">
+        <div class="brand-row">
+          <span class="brand-mark">3</span>
+          <div>
+            <h1>3MUSKETTERS</h1>
+            <p class="brand-sub">HISTORICAL-FANTASY · MULTIPLAYER · PERSISTENT</p>
+          </div>
+        </div>
+        <p class="lede">A top-down war of muskets, orbiting steel and rival banners. Fight themed soldiers, take their gear, craft beyond your means and march through eleven worlds.</p>
+        <div class="identity" id="start-identity">
+          <div><span class="eyebrow">SOLDIER</span><strong id="start-name">Connecting…</strong></div>
+          <div><span class="eyebrow">FACTION</span><strong id="start-faction">—</strong></div>
+          <div><span class="eyebrow">LEVEL</span><strong id="start-level">1</strong></div>
+          <div><span class="eyebrow">CLAN</span><strong id="start-clan">NONE</strong></div>
+        </div>
+        <button id="play-button" class="primary big" disabled>DEPLOY TO THE FRONTIER</button>
+        <p id="start-status" class="fineprint">Connecting to the shared world…</p>
+        <div class="menu-grid" id="start-menu"></div>
+        <p class="fineprint">WASD / arrows to move · E at a portal · progress saves automatically · real players share the world</p>
+      </div>
+    </section>
+
+    <section id="game-screen" class="game-screen hidden">
+      <canvas id="game" aria-label="Game world"></canvas>
+
+      <div class="hud-top">
+        <div class="hud-brand">
+          <span class="brand-mark small">3</span>
+          <div><strong>3MUSKETTERS</strong><small id="world-label">—</small></div>
+        </div>
+        <div class="hud-actions">
+          <button data-panel="worlds">WORLDS</button>
+          <button data-panel="inventory">INVENTORY</button>
+          <button data-panel="menu" class="menu-button">MENU</button>
+        </div>
+      </div>
+
+      <div class="hud-status">
+        <span id="connection" class="pill">Connecting…</span>
+        <span id="hud-faction-tag" class="pill hidden"></span>
+        <span id="hud-clan-tag" class="pill hidden"></span>
+        <span id="pvp-tag" class="pill danger hidden">PvP</span>
+      </div>
+
+      <div class="hud-left">
         <div class="bar-label"><span>HEALTH</span><span id="health-value">100 / 100</span></div>
         <div class="bar"><i id="health-bar"></i></div>
-        <div class="bar-label xp-label"><span>EXPERIENCE</span><span id="xp-value">0 XP</span></div>
+        <div class="bar-label xp-label"><span>LEVEL <b id="level-value">1</b> · XP</span><span id="xp-value">0 / 80</span></div>
         <div class="bar xp-bar"><i id="xp-bar"></i></div>
-        <div id="weapon-summary" class="world-label">Redcoat Saber · Brown Bess</div>
-        <div class="world-label">BRITISH COUNTRYSIDE <span>• SAFE FRONTIER</span></div>
-      </aside>
+        <div class="hud-meta">
+          <span id="coins">◈ 0</span>
+          <span id="capacity">0 / 24</span>
+          <span id="points">0 pts</span>
+        </div>
+        <div id="loadout" class="loadout"></div>
+      </div>
+
+      <div class="hud-right">
+        <div class="minimap-frame">
+          <canvas id="minimap" width="200" height="134" aria-label="Minimap"></canvas>
+          <div class="mini-legend"><span class="dot you"></span>YOU <span class="dot portal"></span>PORTAL <span class="dot boss"></span>BOSS</div>
+        </div>
+      </div>
+
+      <div id="boss-bar" class="boss-bar hidden">
+        <div class="bar-label"><span id="boss-name">Boss</span><span id="boss-health-text"></span></div>
+        <div class="bar boss"><i id="boss-health-bar"></i></div>
+      </div>
+
+      <div id="portal-hint" class="portal-hint hidden">Press <b>E</b> to enter <span id="portal-name"></span></div>
       <div id="toast" class="toast" aria-live="polite"></div>
+      <div class="controls-hint">WASD / ARROWS MOVE · E PORTAL · MENU FOR EVERYTHING</div>
     </section>
-    <footer><span>WASD / ARROWS TO MOVE</span><span>Shared world prototype · Progress saves automatically</span></footer>
+
+    <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+      <div class="panel">
+        <header class="panel-head">
+          <h2 id="panel-title">Menu</h2>
+          <button id="panel-close" aria-label="Close panel">✕</button>
+        </header>
+        <div id="panel-body" class="panel-body"></div>
+      </div>
+    </div>
+
+    <div id="boot" class="boot">Loading 3MUSKETTERS…</div>
   </main>
   <script src="/socket.io/socket.io.js"></script>
   <script type="module" src="/client.js"></script>
