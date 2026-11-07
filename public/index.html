@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171d26">
+  <title>3MUSKETTERS</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">3</span><span>3MUSKETTERS<small>FIELD TEST</small></span></div>
+      <div class="player-info"><span id="player-name">Connecting…</span><span id="level">LVL 1</span></div>
+    </header>
+    <section class="game-frame" aria-label="Game world">
+      <canvas id="game" aria-label="Game screen"></canvas>
+      <div class="status-pill" id="connection">Connecting to server…</div>
+      <aside class="hud">
+        <div class="bar-label"><span>HEALTH</span><span id="health-value">100 / 100</span></div>
+        <div class="bar"><i id="health-bar"></i></div>
+        <div class="bar-label xp-label"><span>EXPERIENCE</span><span id="xp-value">0 XP</span></div>
+        <div class="bar xp-bar"><i id="xp-bar"></i></div>
+        <div class="world-label">BRITISH COUNTRYSIDE <span>• SAFE FRONTIER</span></div>
+      </aside>
+      <div id="toast" class="toast" aria-live="polite"></div>
+    </section>
+    <footer><span>WASD / ARROWS TO MOVE</span><span>Shared world prototype · Progress saves automatically</span></footer>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/client.js"></script>
+</body>
+</html>
