@@ -17,6 +17,16 @@ Or with Docker from the Base44 environment (host port 3000). No database or exte
 npm run check    # parse-check the server modules and the browser client
 ```
 
+## Deploy (Render)
+
+`render.yaml` is a Render Blueprint for the public build: a free Node web service that runs `npm ci`, starts with `npm start` (the app reads `PORT`), and health-checks `/health`.
+
+1. Push this branch to GitHub.
+2. In Render, choose **New → Blueprint**, select the `3MUSKETTERS` repository and this branch, then **Apply**.
+3. Render builds the app and gives you a public `https://<name>.onrender.com` URL with WebSocket support for multiplayer.
+
+Free-tier caveats: the service sleeps after 15 minutes without traffic (the next visit takes about a minute to wake), and free instances have no persistent disk, so `data/profiles.json` resets on every restart, deploy or wake — guest progress is lost. A paid instance with a disk keeps profiles.
+
 ## Controls
 
 - **WASD / arrow keys** — move
